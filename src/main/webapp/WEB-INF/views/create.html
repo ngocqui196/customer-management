@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html  lang xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+    <meta charset="UTF-8">
+    <title>Create Customer</title>
+</head>
+<body>
+    <h1>Create Customer</h1>
+
+    <h4 th:fragment="home"><a th:href="@{/customers}">Comback List Customer</a></h4>
+
+    <div th:if="${mess}">
+        <span th:text="${mess}"></span>
+    </div>
+
+    <form th:action="@{/customers/create}" th:object="${customer}" method="post">
+        <th:table>
+            <tr>
+                <td>Name :</td>
+                <td><input th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <td>email :</td>
+                <td><input th:field="*{email}"></td>
+            </tr>
+            <tr>
+                <td>Address :</td>
+                <td><input th:field="*{address}"></td>
+            </tr>
+            <input type="submit" value="Tạo mới">
+        </th:table>
+
+
+    </form>
+</body>
+</html>

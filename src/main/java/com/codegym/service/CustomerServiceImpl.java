@@ -9,6 +9,9 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
     private static List<Customer> customers;
 
+    public CustomerServiceImpl() {
+    }
+
     static {
 
         customers = new ArrayList<>();
@@ -26,20 +29,29 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void save(int id,Customer customer) {
+    public Customer findById(int id) {
 
-        customers.add( id,customer);
+        for (Customer customer:
+             customers ) {
+            if (customer.getId() == id)
+            return customer;
+        }
+            return null;
     }
 
     @Override
-    public Customer findById(int id) {
-        return customers.get(id);
+    public void update(int id, Customer customer) {
+        customers.set(customers.indexOf(this.findById(id)),customer);
     }
-
-
 
     @Override
     public void remove(int id) {
-        customers.remove(id);
+            customers.removeIf(customer -> customer.getId() == id);
+
+    }
+
+    @Override
+    public void save(Customer customer) {
+        customers.add(customer);
     }
 }
